@@ -61,7 +61,7 @@ class LinkedList {
     let currentNode = this.head;
 
     //list has one element
-    if(this.tail = currentNode){
+    if(this.tail === currentNode){
       this.head = null;
       this.tail = null;
       this.length -= 1;
@@ -69,7 +69,7 @@ class LinkedList {
     }
     //any other case
     else{
-      while(currentNode.next != tail){
+      while(currentNode.next != this.tail){
         currentNode = currentNode.next;
       }
       let lastVal = currentNode.next.val;
@@ -83,24 +83,87 @@ class LinkedList {
   /** shift(): return & remove first item. */
 
   shift() {
+    //list is empty
+    if(this.length === 0){
+      throw new Error("Empty List");
+    }
+    let firstNode = this.head;
 
+    //list has one element
+    if(this.tail === this.head){
+      this.head = null;
+      this.tail = null;
+      this.length -= 1;
+      return firstNode.val
+    }
+    //any other case
+    else{
+      let firstVal = firstNode.val;
+      this.head = firstNode.next;
+      this.length -= 1;
+      return firstVal;
+    }
   }
 
   /** getAt(idx): get val at idx. */
 
   getAt(idx) {
+    if(idx >= this.length || idx < 0){
+      throw new Error("Invalid Index");
+    }
+
+    let currentNode = this.head;
+
+    for(let i = 0; i < idx; i++){
+      currentNode = currentNode.next;
+    }
+
+    return currentNode.val;
 
   }
 
   /** setAt(idx, val): set val at idx to val */
 
   setAt(idx, val) {
+    if(idx >= this.length || idx < 0){
+      throw new Error("Invalid Index");
+    }
 
+    let currentNode = this.head;
+
+    for(let i = 0; i < idx; i++){
+      currentNode = currentNode.next;
+    }
+
+    currentNode.val = val;
   }
 
   /** insertAt(idx, val): add node w/val before idx. */
 
   insertAt(idx, val) {
+    if(idx > this.length || idx < 0){
+      throw new Error("Invalid Index");
+    }
+
+    if(this.length <= 1){
+      this.unshift(val);
+    }
+    else if(idx === this.length){
+      this.push(val);
+    }
+    else{
+      let currentNode = this.head;
+
+      for(let i = 0; i < idx-1; i++){
+        currentNode = currentNode.next;
+      }
+      let nextNode = currentNode.next;
+      let newNode = new Node(val);
+      currentNode.next = newNode;
+      newNode.next = nextNode;
+      this.length += 1;
+    }
+    
 
   }
 
