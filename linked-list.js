@@ -48,12 +48,13 @@ class LinkedList {
       newNode.next = this.head;
     }
     this.head = newNode;
+    this.length += 1;
   }
 
   /** pop(): return & remove last item. */
 
   pop() {
-
+    return this.removeAt
   }
 
   /** shift(): return & remove first item. */
@@ -83,7 +84,19 @@ class LinkedList {
   /** removeAt(idx): return & remove item at idx, */
 
   removeAt(idx) {
+    if(idx >= this.length || idx < 0){
+      throw new Error("Invalid Index");
+    }
 
+    if(idx === 0){
+      let value = this.head.val;
+      this.head = this.head.next;
+      this.length -= 1;
+      return value;
+    }
+    else if(idx === this.length - 1){
+      
+    }
   }
 
   /** average(): return an average of all values in the list */
