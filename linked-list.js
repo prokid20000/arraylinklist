@@ -23,13 +23,31 @@ class LinkedList {
   /** push(val): add new value to end of list. */
 
   push(val) {
+    let newNode = new Node(val)
 
+    if(this.head === null){
+      this.head = newNode;
+    }
+    else{
+      this.tail.next = newNode;
+    }
+    this.tail = newNode;
+    this.length += 1;
+    
   }
 
   /** unshift(val): add new value to start of list. */
 
   unshift(val) {
+    let newNode = new Node(val)
 
+    if(this.head === null){
+      this.tail = newNode;
+    }
+    else{
+      newNode.next = this.head;
+    }
+    this.head = newNode;
   }
 
   /** pop(): return & remove last item. */
