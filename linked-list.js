@@ -54,7 +54,30 @@ class LinkedList {
   /** pop(): return & remove last item. */
 
   pop() {
-    return this.removeAt
+    //list is empty
+    if(this.length === 0){
+      throw new Error("Empty List");
+    }
+    let currentNode = this.head;
+
+    //list has one element
+    if(this.tail = currentNode){
+      this.head = null;
+      this.tail = null;
+      this.length -= 1;
+      return currentNode.val
+    }
+    //any other case
+    else{
+      while(currentNode.next != tail){
+        currentNode = currentNode.next;
+      }
+      let lastVal = currentNode.next.val;
+      currentNode.next = null;
+      this.tail = currentNode;
+      this.length -= 1;
+      return lastVal;
+    }
   }
 
   /** shift(): return & remove first item. */
@@ -93,9 +116,6 @@ class LinkedList {
       this.head = this.head.next;
       this.length -= 1;
       return value;
-    }
-    else if(idx === this.length - 1){
-      
     }
   }
 
