@@ -170,22 +170,46 @@ class LinkedList {
   /** removeAt(idx): return & remove item at idx, */
 
   removeAt(idx) {
+    if(this.length === 0){
+      throw new Error("Empty List")
+    }
     if(idx >= this.length || idx < 0){
       throw new Error("Invalid Index");
     }
 
-    if(idx === 0){
-      let value = this.head.val;
-      this.head = this.head.next;
-      this.length -= 1;
-      return value;
+    //only one item in list OR last item in list
+    if(this.length === 1 || idx === this.length-1){
+      this.pop();
     }
+    //first item in list
+    else if(idx === 0){
+      this.shift();
+    }
+    else{
+      let currentNode = this.head;
+
+      for(let i = 0; i < idx -1; i++){
+        currentNode = currentNode.next;
+      }
+      let nextNode = currentNode.next.next;
+      currentNode.next = nextNode;
+      this.length -= 1;
+    }
+
   }
 
   /** average(): return an average of all values in the list */
 
   average() {
+    if(this.length === 0) return 0;
     
+    let sum = 0;
+    let currentNode = this.head;
+    for(let i = 0; i < this.length; i++){
+      sum+= currentNode.val;
+      currentNode = currentNode.next;
+    }
+    return sum/this.length;
   }
 }
 

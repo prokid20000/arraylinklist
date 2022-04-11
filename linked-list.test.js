@@ -1,3 +1,4 @@
+const { expect } = require("@jest/globals");
 const LinkedList = require("./linked-list");
 
 describe("push", function() {
@@ -132,6 +133,18 @@ describe("removeAt", function() {
     expect(lst.length).toBe(0);
     expect(lst.head).toBe(null);
     expect(lst.tail).toBe(null);
+  });
+
+  it("removes index 2 from 5-item list", function() {
+    let lst = new LinkedList(["a", "b", "c", "d", "e"]);
+
+    lst.removeAt(2);
+    expect(lst.length).toBe(4);
+    expect(lst.head.val).toBe("a");
+    expect(lst.tail.val).toBe("e");
+    expect(lst.head.next.val).toBe("b");
+    expect(lst.head.next.next.val).toBe("d");
+    expect(lst.head.next.next.next.val).toBe("e");
   });
 });
 
